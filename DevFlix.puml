@@ -5,8 +5,8 @@ skinparam Style strictuml
 :Administrador: as administrador
 
 /' Casos de uso do usuário '/
-(Realização cadastro) as cadastro
-(Realização login) as login
+(Realizar cadastro) as cadastro
+(Realizar login) as login
 (Apagar vídeos) as apagarv
 (Pesquisar vídeos) as pesqv
 (Cadastrar vídeos) as cadv
