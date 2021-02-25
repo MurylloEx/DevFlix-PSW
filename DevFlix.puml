@@ -5,11 +5,6 @@ skinparam Style strictuml
 :Administrador: as administrador
 
 
-
-
-
-
-
 /' Casos de uso do usuário '/
 package Autenticação {
     (Realizar cadastro) as cadastro
@@ -43,11 +38,11 @@ usuario <|-down-- administrador
 usuario -up-> cadv
 usuario -up-> pesqcatv
 usuario -up-> apgcatv
-usuario -right-> pesqv
+usuario -up-> pesqv
 usuario -up-> cadcatv
 usuario -up-> login
 usuario -up-> apagarv
-usuario -left-> cadastro
+usuario -up-> cadastro
 
 
 /' Include e Extend dos casos de uso do usuário '/
