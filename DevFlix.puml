@@ -4,24 +4,37 @@ skinparam Style strictuml
 :Usuário: as usuario
 :Administrador: as administrador
 
+
+
+
+
+
+
 /' Casos de uso do usuário '/
-(Realizar cadastro) as cadastro
-(Realizar login) as login
-(Apagar vídeos) as apagarv
-(Pesquisar vídeos) as pesqv
-(Cadastrar vídeos) as cadv
-(Informar descrição) as infdesc
-(Pesquisar categoria de vídeos) as pesqcatv
-(Cadastrar categoria de vídeos) as cadcatv
-(Apagar categoria de videos) as apgcatv
-(Limpar vídeos da categoria) as limcatv
-(Verificar proprietário do vídeo) as verifprop
+package Autenticação {
+    (Realizar cadastro) as cadastro
+    (Realizar login) as login
+}
+package "Vídeos e categorias de vídeos" {
+    (Apagar vídeos) as apagarv
+    (Pesquisar vídeos) as pesqv
+    (Cadastrar vídeos) as cadv
+    (Informar descrição) as infdesc
+    (Pesquisar categoria de vídeos) as pesqcatv
+    (Cadastrar categoria de vídeos) as cadcatv
+    (Apagar categoria de videos) as apgcatv
+    (Verificar proprietário do vídeo) as verifprop
+}
+
 
 /' Casos de uso do administrador '/
-(Modificar categoria do vídeo) as modcatv
-(Modificar conteúdo do vídeo) as modcontv
-(Apagar vídeo de outro usuário) as apgvout
-(Modificar título e descrição do vídeo) as modtitdesc
+package Administração {
+    (Modificar categoria do vídeo) as modcatv
+    (Modificar conteúdo do vídeo) as modcontv
+    (Apagar vídeo de outro usuário) as apgvout
+    (Modificar título e descrição do vídeo) as modtitdesc
+}
+
 
 /' Generalização dos atores '/
 usuario <|-down-- administrador
@@ -39,7 +52,7 @@ usuario -left-> cadastro
 
 /' Include e Extend dos casos de uso do usuário '/
 apagarv .up.> verifprop : <<include>>
-apgcatv .up.> limcatv : <<include>>
+apgcatv .up.> apagarv : <<include>>
 infdesc .down.> cadv : <<extend>>
 
 
