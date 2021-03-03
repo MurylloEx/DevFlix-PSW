@@ -1,0 +1,67 @@
+@startuml
+
+class User {
+    -m_UserId : int
+    -m_UserName : string
+    -m_UserEmail : string
+    -m_UserType : int
+    +registerUser() : void
+    +createToken() : void
+    +deleteToken() : void
+}
+
+class Admin {
+    +modifyCategory() : void
+    +modifyVideoUrl() : void
+    +modifyMetaData() : void
+    +modifyVideoUrl() : void
+}
+
+class Category {
+    -m_CategoryId : int
+    -m_CategoryTitle : string
+    -m_CategoryUrl : string
+    -m_CategorySubtitle : string
+    -m_CategoryColor : byte
+    +setCategoryTitle() : void
+    +getCategoryTitle() : string
+    +setCategoryUrl() : void
+    +getCategoryUrl() : string
+    +setCategorySubtitle() : void
+    +getCategorySubtitle() : string
+    +setCategoryColor() : void
+    +getCategoryColor() : byte
+    +searchCategory() : Category
+    +deleteCategory() : void
+    +createCategory() : void
+}
+
+class Video {
+    -m_VideoId : int
+    -m_VideoUrl : string
+    -m_VideoCategory : Category
+    -m_VideoMetadata : Metadata
+    +deleteVideo() : void
+    +searchVideo() : Video
+    +createVideo() : void
+    +setMetadata() : void
+    +getMetadata() : Metadata
+    +getUserOwnerID() : int
+}
+class Metadata{
+    -m_MetadataID : int
+    -m_MetadataTitle : string
+    -m_MetadataDescription : string
+    +setMetadataId: void
+    +getMetadataId: int
+    +setMetadataTitle: void
+    +getMetadataTitle: string
+    +setMetadataDescription: void
+    +getMetadataDescription: string
+}
+
+User -- Video
+User <|-- Admin
+Video *-- Metadata
+Video *-- Category
+@endtuml
