@@ -45,7 +45,7 @@ usuario -up-> apagarv
 
 usuario -up-> login
 usuario -left-> cadastro
-usuario -down-> logout
+usuario -left-> logout
 
 
 /' Include e Extend dos casos de uso do usuário '/
