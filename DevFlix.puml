@@ -15,9 +15,9 @@ package "Vídeos e categorias de vídeos" {
     (Pesquisar vídeos) as pesqv
     (Cadastrar vídeos) as cadv
     (Informar descrição) as infdesc
-    (Pesquisar categoria de vídeos) as pesqcatv
-    (Cadastrar categoria de vídeos) as cadcatv
-    (Apagar categoria de videos) as apgcatv
+    (Pesquisar categorias de vídeos) as pesqcatv
+    (Cadastrar categorias de vídeos) as cadcatv
+    (Apagar categorias de videos) as apgcatv
     (Verificar proprietário do vídeo) as verifprop
 }
 
