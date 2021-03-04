@@ -1,5 +1,7 @@
 @startuml
 
+left to right direction
+
 class User {
     -m_UserId : int
     -m_UserName : string
@@ -22,7 +24,7 @@ class Category {
     -m_CategoryTitle : string
     -m_CategoryUrl : string
     -m_CategorySubtitle : string
-    -m_CategoryColor : byte
+    -m_CategoryColor : byte[3]
     +setCategoryTitle() : void
     +getCategoryTitle() : string
     +setCategoryUrl() : void
@@ -30,8 +32,8 @@ class Category {
     +setCategorySubtitle() : void
     +getCategorySubtitle() : string
     +setCategoryColor() : void
-    +getCategoryColor() : byte
-    +searchCategory() : Category
+    +getCategoryColor() : byte[3]
+    +searchCategory() : Category[]
     +deleteCategory() : void
     +createCategory() : void
 }
@@ -41,8 +43,8 @@ class Video {
     -m_VideoUrl : string
     -m_VideoCategory : Category
     -m_VideoMetadata : Metadata
-    +deleteVideo() : void
-    +searchVideo() : Video
+    +deleteVideo() : Svoid
+    +searchVideo() : Video[]
     +createVideo() : void
     +setMetadata() : void
     +getMetadata() : Metadata
@@ -59,9 +61,9 @@ class Metadata{
     +setMetadataDescription(): void
     +getMetadataDescription(): string
 }
-
-User -- Video
+User "1"--"0..*" Category
+User "1"--"0..*" Video
 User <|-- Admin
-Video *-- Metadata
-Video *-- Category
+Video "1"*--"1" Metadata
+Video "0..*"--"1" Category
 @endtuml
