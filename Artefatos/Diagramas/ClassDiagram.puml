@@ -52,12 +52,12 @@ class Metadata{
     -m_MetadataID : int
     -m_MetadataTitle : string
     -m_MetadataDescription : string
-    +setMetadataId: void
-    +getMetadataId: int
-    +setMetadataTitle: void
-    +getMetadataTitle: string
-    +setMetadataDescription: void
-    +getMetadataDescription: string
+    +setMetadataId(): void
+    +getMetadataId(): int
+    +setMetadataTitle(): void
+    +getMetadataTitle(): string
+    +setMetadataDescription(): void
+    +getMetadataDescription(): string
 }
 
 User -- Video
