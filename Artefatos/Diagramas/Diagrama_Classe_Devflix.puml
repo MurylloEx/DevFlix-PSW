@@ -65,5 +65,5 @@ User "1"--"0..*" Category
 User "1"--"0..*" Video
 User <|-- Admin
 Video "1"*--"1" Metadata
-Video "0..*"--"1" Category
+Video "0..*"*--"1" Category
 @endtuml
