@@ -10,6 +10,7 @@ class User {
     +registerUser() : void
     +createToken() : void
     +deleteToken() : void
+    
 }
 
 class Admin {
@@ -64,6 +65,14 @@ class Metadata{
 User "1"--"0..*" Category
 User "1"--"0..*" Video
 User <|-- Admin
-Video "1"*--"1" Metadata
-Video "0..*"*--"1" Category
+Video "1"*--"1" Metadata : Possui
+Video "0..*"*--"1" Category : Possui
+
+note left of User : Cria um token de acesso, equivalente a fazer login.
+note left of User : Equivalente a fazer logout. Responsável por expirar o token.
+
+note left of Video : URL de um vídeo do Youtube.
+
+note bottom of Metadata : São informações vindas diretamente do Youtube.
+
 @endtuml
