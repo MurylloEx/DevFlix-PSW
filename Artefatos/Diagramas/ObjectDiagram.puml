@@ -1,0 +1,35 @@
+@startuml ObjectDiagram
+
+object User {
+    m_UserId = 2
+    m_UserName = "Gustavo"
+    m_UserEmail = "luiz.gustavo@upe.br"
+    m_UserType = 1
+}
+
+object Category {
+    m_CategoryID = 3
+    m_CategoryTitle = "Ciência"
+    m_CategoryUrl = "http://devflix.com.br/ciencia"
+    m_CategorySubtitle = "videos de ciencia"
+    m_CategoryColor = byte[3]
+}
+
+object Video {
+    m_VideoId = 1
+    m_VideoUrl = "https://youtu.be/ZYz0O8gFbyQ"
+    m_VideoCategory = Category {m_CategoryID = 3, m_CategoryTitle = Ciência, ... m_CategoryColor = [0xfc,0xd9,0x15]}
+    m_VideoMetadata = Metadata {m_MetadataID = 5, ... m_MetadataDescription = Vídeo da ...}
+}
+
+object Metadata {
+    m_MetadataID = 5
+    m_MetadataTitle = "O que é Ciência?"
+    m_MetadataDescription = "Video da disciplina de Fundamentos Teóricos, Metodológicos e Prática Escolar em Ciências I."
+}
+
+User -- Category
+Category -right- Video
+Video -- Metadata
+
+@enduml

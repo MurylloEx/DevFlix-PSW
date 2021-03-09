@@ -1,0 +1,31 @@
+@startuml PackageDiagram
+
+left to right direction
+
+package "Camada de Aplicação" as CamadaDeApresentação {
+    package Views
+    package React
+}
+
+package LógicaDaAplicação as "Lógica de Aplicação"   {
+    package ObjetosDeControle
+    package "Lógica de Negócio" as LógicaDeNegócio {
+        package VídeosECategoriaDeVídeos
+        package Autenticação
+        package Administração
+    }
+}
+
+package Dados {
+    package SGBD
+    package MotorDePesquisa
+    package SistemaDeArquivos
+}
+
+Views <.. React
+Views .down.> ObjetosDeControle
+SGBD <.. MotorDePesquisa
+MotorDePesquisa ..> SistemaDeArquivos
+ObjetosDeControle <..> LógicaDeNegócio
+LógicaDeNegócio .up.> MotorDePesquisa
+@enduml
