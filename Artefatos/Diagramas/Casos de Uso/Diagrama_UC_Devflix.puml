@@ -1,5 +1,6 @@
 @startuml DevFlix
 skinparam Style strictuml
+left to right direction
 
 :Usuário: as usuario
 :Administrador: as administrador
@@ -7,6 +8,7 @@ skinparam Style strictuml
 
 /' Casos de uso do usuário '/
 package Autenticação {
+    (Realizar logout) as logout
     (Realizar cadastro) as cadastro
     (Realizar login) as login
 }
@@ -34,15 +36,18 @@ package Administração {
 /' Generalização dos atores '/
 usuario <|-down-- administrador
 
+
 /' Associação dos casos de uso do usuário '/
 usuario -up-> cadv
 usuario -up-> pesqcatv
 usuario -up-> apgcatv
 usuario -up-> pesqv
 usuario -up-> cadcatv
-usuario -up-> login
 usuario -up-> apagarv
-usuario -up-> cadastro
+
+usuario -up-> login
+usuario -left-> cadastro
+usuario -left-> logout
 
 
 /' Include e Extend dos casos de uso do usuário '/
