@@ -28,8 +28,8 @@
   <sub>O projeto DevFlix. Foi projetado com ❤︎ por
     <a href="https://github.com/tonicprism">Luiz Gustavo</a>
     <a href="https://github.com/MurylloEx">Muryllo Pimenta</a>
-    <a href="https://github.com/#">Kelvin Vasconcelos</a>
-    <a href="https://github.com/#">Lucas Henrique</a>
+    <a href="https://github.com/KelvinVasconcelos">Kelvin Vasconcelos</a>
+    <a href="https://github.com/Wolf-gangSE">Lucas Henrique</a>
   </sub>
 </div>
 
