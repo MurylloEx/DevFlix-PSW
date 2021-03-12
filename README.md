@@ -25,7 +25,7 @@
 > curso, por exemplo? Vamos montar o nosso DevFlix?.
 
 <p align="center">
-    <a href="README-pt.md">Português</a>
+    <a href="README.md">Português</a>
 </p>
 
 <div align="center">
