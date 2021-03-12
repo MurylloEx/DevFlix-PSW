@@ -10,7 +10,7 @@ package "Camada de Aplicação" as CamadaDeApresentação {
 package "Lógica de Aplicação" as LógicaDaAplicação {
     package Objetos_de_controle
     package "Lógica de Negócio" as LógicaDeNegócio {
-        package Vídeo_e_categoria_de_vídeos
+        package "Vídeo e categoria de vídeos"
         package Autenticação
         package Administração
     }

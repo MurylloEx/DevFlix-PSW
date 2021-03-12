@@ -6,7 +6,7 @@ class User {
     -m_UserId : int
     -m_UserName : string
     -m_UserEmail : string
-    -m_UserType : int
+    -m_UserType : UserType
     +registerUser() : void
     +createToken() : void
     +deleteToken() : void
