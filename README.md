@@ -18,7 +18,11 @@
    </a>
 </p>
 
-> 📺 **DevFlix** é um _breve descrição_.
+> 📺 Seria legal poder registrar e administrar em um lugar todos os videos
+> relacionados à dev que eu desejo/quero aprender. Os vídeos poderiam ser catalogados,
+> relacionados, buscados e gerenciados de acordo com algum contexto/necessidade em
+> um determinado momento. Imagina se a gente tivesse isso para o nosso contexto de
+> curso, por exemplo? Vamos montar o nosso DevFlix?.
 
 <p align="center">
     <a href="README-pt.md">Português</a>
@@ -28,8 +32,8 @@
   <sub>O projeto DevFlix. Foi projetado com ❤︎ por
     <a href="https://github.com/tonicprism">Luiz Gustavo</a>
     <a href="https://github.com/MurylloEx">Muryllo Pimenta</a>
-    <a href="https://github.com/#">Kelvin Vasconcelos</a>
-    <a href="https://github.com/#">Lucas Henrique</a>
+    <a href="https://github.com/KelvinVasconcelos">Kelvin Vasconcelos</a>
+    <a href="https://github.com/Wolf-gangSE">Lucas Henrique</a>
   </sub>
 </div>
 
@@ -62,7 +66,5 @@ Este projeto foi feito utilizando as seguintes tecnologias:
 - [PlantUML](https://plantuml.com/)
 - [Astah](https://astah.net/)
 - [Lucidcharts](https://lucid.app/documents)
-
-# ✌ Feito com ❤︎ por [Luiz Gustavo](https://github.com/#), [Lucas Henrique](https://github.com/#), [Muryllo Pimenta](https://github.com/MurylloEx/), [Kelvin Vasconcelos](https://github.com/#)
 
 Deixe uma ⭐️ se este projeto ajudou você!
