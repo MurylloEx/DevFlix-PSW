@@ -40,11 +40,11 @@
 # 📸 Diagramas
 
 <p align="center">
-   <h2>Diagrama de classe</h2>
+   <h2>Diagrama de classes</h2>
    <img src="./Artefatos/Diagramas/Diagrama_Classe_Devflix.png">
 </p>
 <p align="center">
-   <h2>Diagrama de objeto</h2>
+   <h2>Diagrama de objetos</h2>
    <img src="./Artefatos/Diagramas/Diagrama_Objeto_Devflix.png">
 </p>
 <p align="center">
@@ -53,7 +53,7 @@
    <img src="./Artefatos/Diagramas/Diagrama_Pacotes_Devflix.png">
 </p>
 <p align="center">
-   <h2>Diagrama de caso de uso</h2>
+   <h2>Diagrama de caso de usos</h2>
 
    <img src="./Artefatos/Diagramas/Diagrama_UC_Devflix.png">
 </p>
