@@ -10,12 +10,11 @@ class User {
     +registerUser() : void
     +createToken() : void
     +deleteToken() : void
-    
 }
 
 class Admin {
     +modifyCategory() : void
-    +modifyVideoUrl() : void
+    +deleteVideo() : void
     +modifyMetaData() : void
     +modifyVideoUrl() : void
 }
@@ -44,7 +43,7 @@ class Video {
     -m_VideoUrl : string
     -m_VideoCategory : Category
     -m_VideoMetadata : Metadata
-    +deleteVideo() : Svoid
+    +deleteVideo() : void
     +searchVideo() : Video[]
     +createVideo() : void
     +setMetadata() : void
@@ -62,16 +61,23 @@ class Metadata{
     +setMetadataDescription(): void
     +getMetadataDescription(): string
 }
+
+enum UserType {
+    NORMAL_USER = 1
+    ADMIN_USER = 2
+}
+
+User "1"-up-"1" UserType
 User "1"--"0..*" Category
 User "1"--"0..*" Video
 User <|-- Admin
 Video "1"*--"1" Metadata : Possui
-Video "0..*"*--"1" Category : Possui
+Video "0..*"*--"1" Category : Associa
 
-note left of User : Cria um token de acesso, equivalente a fazer login.
-note left of User : Equivalente a fazer logout. Responsável por expirar o token.
+note left of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
+note left of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
 
-note left of Video : URL de um vídeo do Youtube.
+note left of Video : {m_VideoUrl} URL de um vídeo do Youtube.
 
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 

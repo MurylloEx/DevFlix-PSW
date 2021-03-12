@@ -7,10 +7,10 @@ package "Camada de Aplicação" as CamadaDeApresentação {
     package React
 }
 
-package LógicaDaAplicação as "Lógica de Aplicação"   {
-    package ObjetosDeControle
+package "Lógica de Aplicação" as LógicaDaAplicação {
+    package Objetos_de_controle
     package "Lógica de Negócio" as LógicaDeNegócio {
-        package VídeosECategoriaDeVídeos
+        package Vídeo_e_categoria_de_vídeos
         package Autenticação
         package Administração
     }
@@ -18,14 +18,14 @@ package LógicaDaAplicação as "Lógica de Aplicação"   {
 
 package Dados {
     package SGBD
-    package MotorDePesquisa
-    package SistemaDeArquivos
+    package Motor_de_pesquisa 
+    package Sistema_de_arquivos
 }
 
 Views <.. React
-Views .down.> ObjetosDeControle
-SGBD <.. MotorDePesquisa
-MotorDePesquisa ..> SistemaDeArquivos
-ObjetosDeControle <..> LógicaDeNegócio
-LógicaDeNegócio .up.> MotorDePesquisa
+Views .down.> Objetos_de_controle
+SGBD <.. Motor_de_pesquisa
+Motor_de_pesquisa ..> Sistema_de_arquivos
+Objetos_de_controle <..> LógicaDeNegócio
+LógicaDeNegócio .up.> Motor_de_pesquisa
 @enduml
