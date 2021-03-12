@@ -27,8 +27,9 @@
 <div align="center">
   <sub>O projeto DevFlix. Foi projetado com ❤︎ por
     <a href="https://github.com/tonicprism">Luiz Gustavo</a>
-    <a href="https://github.com/tonicprism">Luiz Gustavo</a>
-    <a href="https://github.com/tonicprism">Luiz Gustavo</a>
+    <a href="https://github.com/MurylloEx">Muryllo Pimenta</a>
+    <a href="https://github.com/#">Kelvin Vasconcelos</a>
+    <a href="https://github.com/#">Lucas Henrique</a>
   </sub>
 </div>
 
@@ -62,6 +63,6 @@ Este projeto foi feito utilizando as seguintes tecnologias:
 - [Astah](https://astah.net/)
 - [Lucidcharts](https://lucid.app/documents)
 
-# ✌ Feito com ❤︎ por [Luiz Gustavo](https://github.com/#), [Lucas Henrique](https://github.com/tonicprism/), [Muryllo Pimenta](https://github.com/MurylloEx/), [Kelvin Vasconcelos](https://github.com/#)
+# ✌ Feito com ❤︎ por [Luiz Gustavo](https://github.com/#), [Lucas Henrique](https://github.com/#), [Muryllo Pimenta](https://github.com/MurylloEx/), [Kelvin Vasconcelos](https://github.com/#)
 
 Deixe uma ⭐️ se este projeto ajudou você!
