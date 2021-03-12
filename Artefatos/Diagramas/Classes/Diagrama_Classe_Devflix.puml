@@ -1,78 +1,65 @@
-@startuml
-
+@startuml DevFlix
+skinparam Style strictuml
 left to right direction
 
-class User {
-    -m_UserId : int
-    -m_UserName : string
-    -m_UserEmail : string
-    -m_UserType : int
-    +registerUser() : void
-    +createToken() : void
-    +deleteToken() : void
-    
+:Usuário: as usuario
+:Administrador: as administrador
+
+
+/' Casos de uso do usuário '/
+package Autenticação {
+    (Realizar logout) as logout
+    (Realizar cadastro) as cadastro
+    (Realizar login) as login
+}
+package "Vídeos e categorias de vídeos" {
+    (Apagar vídeos) as apagarv
+    (Pesquisar vídeos) as pesqv
+    (Cadastrar vídeos) as cadv
+    (Informar descrição) as infdesc
+    (Pesquisar categoria de vídeos) as pesqcatv
+    (Cadastrar categoria de vídeos) as cadcatv
+    (Apagar categoria de vídeos) as apgcatv
+    (Verificar proprietário dos vídeos) as verifprop
 }
 
-class Admin {
-    +modifyCategory() : void
-    +modifyVideoUrl() : void
-    +modifyMetaData() : void
-    +modifyVideoUrl() : void
+
+/' Casos de uso do administrador '/
+package Administração {
+    (Modificar categoria do vídeos) as modcatv
+    (Modificar conteúdo do vídeos) as modcontv
+    (Apagar vídeos de outro usuário) as apgvout
+    (Modificar título e descrição do vídeos) as modtitdesc
 }
 
-class Category {
-    -m_CategoryId : int
-    -m_CategoryTitle : string
-    -m_CategoryUrl : string
-    -m_CategorySubtitle : string
-    -m_CategoryColor : byte[3]
-    +setCategoryTitle() : void
-    +getCategoryTitle() : string
-    +setCategoryUrl() : void
-    +getCategoryUrl() : string
-    +setCategorySubtitle() : void
-    +getCategorySubtitle() : string
-    +setCategoryColor() : void
-    +getCategoryColor() : byte[3]
-    +searchCategory() : Category[]
-    +deleteCategory() : void
-    +createCategory() : void
-}
 
-class Video {
-    -m_VideoId : int
-    -m_VideoUrl : string
-    -m_VideoCategory : Category
-    -m_VideoMetadata : Metadata
-    +deleteVideo() : Svoid
-    +searchVideo() : Video[]
-    +createVideo() : void
-    +setMetadata() : void
-    +getMetadata() : Metadata
-    +getUserOwnerID() : int
-}
-class Metadata{
-    -m_MetadataID : int
-    -m_MetadataTitle : string
-    -m_MetadataDescription : string
-    +setMetadataId(): void
-    +getMetadataId(): int
-    +setMetadataTitle(): void
-    +getMetadataTitle(): string
-    +setMetadataDescription(): void
-    +getMetadataDescription(): string
-}
-User "1"--"0..*" Category
-User "1"--"0..*" Video
-User <|-- Admin
-Video "1"*--"1" Metadata : Possui
-Video "0..*"*--"1" Category : Possui
+/' Generalização dos atores '/
+usuario <|-down-- administrador
 
-note left of User : Cria um token de acesso, equivalente a fazer login.
-note left of User : Equivalente a fazer logout. Responsável por expirar o token.
 
-note left of Video : URL de um vídeo do Youtube.
+/' Associação dos casos de uso do usuário '/
+usuario -up-> cadv
+usuario -up-> pesqcatv
+usuario -up-> apgcatv
+usuario -up-> pesqv
+usuario -up-> cadcatv
+usuario -up-> apagarv
 
-note bottom of Metadata : São informações vindas diretamente do Youtube.
+usuario -up-> login
+usuario -left-> cadastro
+usuario -left-> logout
 
-@endtuml
+
+/' Include e Extend dos casos de uso do usuário '/
+apagarv .up.> verifprop : <<include>>
+apgcatv .up.> apagarv : <<include>>
+infdesc .down.> cadv : <<extend>>
+
+
+/' Associação dos casos de uso do administrador '/
+administrador -right-> modcatv
+administrador -left-> modcontv
+administrador -down-> apgvout
+administrador -down-> modtitdesc
+
+@enduml
