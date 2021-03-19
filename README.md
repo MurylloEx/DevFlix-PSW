@@ -57,6 +57,13 @@
 
    <img src="./Artefatos/Diagramas/Diagrama_UC_Devflix.png">
 </p>
+<p align="center">
+   <h2>Diagramas de atividades</h2>
+
+   <img src="Diagrama_Atv_Login_Devflix.png">
+   <img src="Diagrama_Atv_Categoria_Devflix.png">
+   <img src="Diagrama_Atv_Video_Devflix.png">
+</p>
 
 # :computer: Tecnologias
 
