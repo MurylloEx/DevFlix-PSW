@@ -60,9 +60,9 @@
 <p align="center">
    <h2>Diagramas de atividades</h2>
 
-   <img src="./Artefatos/DiagramasDiagrama_Atv_Login_Devflix.png">
-   <img src="./Artefatos/DiagramasDiagrama_Atv_Categoria_Devflix.png">
-   <img src="./Artefatos/DiagramasDiagrama_Atv_Video_Devflix.png">
+   <img src="./Artefatos/Diagramas/Diagrama_Atv_Login_Devflix.png">
+   <img src="./Artefatos/Diagramas/Diagrama_Atv_Categoria_Devflix.png">
+   <img src="./Artefatos/Diagramas/Diagrama_Atv_Video_Devflix.png">
 </p>
 
 # :computer: Tecnologias
