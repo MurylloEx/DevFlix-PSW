@@ -1,0 +1,35 @@
+@startuml
+
+partition "Diagrama de Autenticação" {
+    start
+        if () then (Já Registrado)
+           
+            partition Logar {
+                start
+                    :Receber e-mail e senha;
+                    :Validar e-mail;
+
+                    if () then (E-mail válido)
+                        :Validar senha;
+                    if () then (Senha válida) 
+                        :Logar;
+                        stop
+                    else (Senha inválida)
+                        end
+                    endif
+                    else (E-mail Inválido)
+                        end
+                    endif
+            }
+
+        else (Ainda não registrado)
+            fork
+                :Auto-Registrar sistema;
+            fork again
+                :Auto-Registrar Google;
+            end fork
+            :Confirmar cadastro;
+            stop
+        endif
+}
+@enduml

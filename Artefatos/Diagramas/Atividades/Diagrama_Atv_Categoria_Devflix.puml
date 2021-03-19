@@ -1,0 +1,38 @@
+@startuml
+
+partition "Diagrama de Categoria" {
+    partition "Modificar categoria" {
+        (A)
+        :Pesquisar categoria;
+        :Localizar categoria;
+        fork
+        :Receber título;
+        fork again
+        :Receber subtítulo;
+        fork again
+        :Receber cor;
+        fork again
+        :Receber URL;
+        end fork
+        :Confirmar alterações;
+        stop
+    }
+    partition "Apagar categoria" {
+        (D)
+        :Pesquisar categoria;
+        :Localizar categoria;
+        :Apagar vídeos da categoria;
+        :Confirmar exclusão;
+        stop
+    }
+        partition "Cadastrar Categoria" {
+        (E)
+        :Receber URL;
+        :Receber título;
+        :Receber subtítulo;
+        :Receber cor;
+        :Confirmar cadastro;
+        stop
+    }
+}
+@enduml

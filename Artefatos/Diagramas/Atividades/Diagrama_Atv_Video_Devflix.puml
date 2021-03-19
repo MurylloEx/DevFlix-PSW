@@ -1,0 +1,37 @@
+@startuml
+
+partition "Diagrama de Vídeo" {
+    partition "Modificar vídeo" {
+        (B)
+        :Pesquisar vídeo;
+        :Localizar vídeo;
+        fork
+        :Receber URL;
+        fork again
+        :Receber título;
+        fork again
+        :Receber descrição;
+        fork again
+        :Receber categoria;
+        end fork
+        stop
+    }
+    partition "Apagar vídeo" {
+        (C)
+        :Pesquisar vídeo;
+        :Localizar vídeo;
+        :Confirmar exclusão;
+        stop
+    }  
+
+    partition "Cadastrar vídeo" {
+        (E)
+        :Receber URL;
+        :Receber título;
+        :Receber descrição;
+        :Receber categoria;
+        :Confirmar cadastro;
+        stop
+    }
+}
+@enduml
