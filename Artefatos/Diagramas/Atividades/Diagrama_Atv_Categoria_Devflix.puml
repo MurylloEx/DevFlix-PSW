@@ -35,4 +35,5 @@ partition "Diagrama de Categoria" {
         stop
     }
 }
+
 @enduml
