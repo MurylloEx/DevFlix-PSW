@@ -146,4 +146,4 @@ note left of Channel : se o Channel não for privado ({getPrivacity()} retornar 
 
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 
-@endtuml
+@enduml

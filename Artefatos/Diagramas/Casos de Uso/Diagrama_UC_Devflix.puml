@@ -1,65 +1,199 @@
 @startuml DevFlix
-skinparam Style strictuml
+title <b>Caso de Uso DevFlix</b>
+
 left to right direction
+skinparam Style strictuml
+skinparam packageStyle rect
+scale 2048 width
+scale 2048 height
 
-:Usuário: as usuario
-:Administrador: as administrador
+actor Usuário as USER
+actor Administrador as ADMIN
 
+ADMIN -down-> USER
 
-/' Casos de uso do usuário '/
-package Autenticação {
-    (Realizar logout) as logout
-    (Realizar cadastro) as cadastro
-    (Realizar login) as login
+package "Autenticação" {
+    (Gerenciar usuários) as UC01
+    (Incluir usuários) as UC02
+    (Alterar usuários) as UC03
+    (Excluir usuários) as UC04
+    (Listar usuários) as UC05
+
+    (Autenticar) as UC06
+    (Entrar com Facebook) as UC07
+    (Entrar com Google) as UC08
+    (Desconectar) as UC09
+    
+    (Cadastrar) as UC10
+    (Cadastrar com Google) as UC11
+    (Cadastrar com Facebook) as UC12
+
+    UC01 <.. UC05 : extend
+    UC01 <.. UC04 : extend
+    UC01 <.. UC03 : extend
+    UC01 <.. UC02 : extend
+
+    UC10 <.. UC11 : extend
+    UC10 <.. UC12 : extend
+
+    UC06 <.. UC07 : extend
+    UC06 <.. UC08 : extend
+    
+    ADMIN -right-> UC01
+
+    USER -up-> UC10
+    USER -up-> UC06
+    USER -down-> UC09
 }
-package "Vídeos e categorias de vídeos" {
-    (Apagar vídeos) as apagarv
-    (Pesquisar vídeos) as pesqv
-    (Cadastrar vídeos) as cadv
-    (Informar descrição) as infdesc
-    (Pesquisar categoria de vídeos) as pesqcatv
-    (Cadastrar categoria de vídeos) as cadcatv
-    (Apagar categoria de vídeos) as apgcatv
-    (Verificar proprietário dos vídeos) as verifprop
+
+package "Canais" {
+  (Gerenciar canais) as UC18
+	(Incluir canais) as UC19
+	(Alterar canais) as UC20
+	(Excluir canais) as UC21
+	(Listar canais) as UC22
+	(Buscar canais) as UC23
+
+    UC18 <.. UC19 : extend;
+    UC18 <.. UC20 : extend;
+    UC18 <.. UC21 : extend;
+    UC18 <.. UC22 : extend;
+    UC18 <.. UC23 : extend;
+
+    USER -up-> UC18
 }
 
+package "Perfil" {
+    (Gerenciar perfil) as UC13
+    (Alterar foto) as UC14
+    (Alterar descrição) as UC15
+    (Alterar preferências) as UC16
+    (Alterar visibilidade do perfil) as UC17
+    
+    UC13 <.. UC14 : extend
+    UC13 <.. UC15 : extend
+    UC13 <.. UC16 : extend
+    UC13 <.. UC17 : extend
 
-/' Casos de uso do administrador '/
-package Administração {
-    (Modificar categoria do vídeos) as modcatv
-    (Modificar conteúdo do vídeos) as modcontv
-    (Apagar vídeos de outro usuário) as apgvout
-    (Modificar título e descrição do vídeos) as modtitdesc
+    USER -left-> UC13
 }
 
+package "Categorias" {
+	(Gerenciar categorias) as UC24
+	(Incluir categorias) as UC25
+	(Alterar categorias) as UC26
+	(Excluir categorias) as UC27
+	(Listar categorias) as UC28
+	(Buscar categorias) as UC29
 
-/' Generalização dos atores '/
-usuario <|-down-- administrador
+  UC24 <.. UC25 : extend;
+  UC24 <.. UC26 : extend;
+  UC24 <.. UC27 : extend;
+  UC24 <.. UC28 : extend;
+  UC24 <.. UC29 : extend;
 
+	(Compartilhar categoria) as UC30
+	(Compartilhar Url da categoria) as UC31
+	(Compartilhar categoria no Whatsapp) as UC32
 
-/' Associação dos casos de uso do usuário '/
-usuario -up-> cadv
-usuario -up-> pesqcatv
-usuario -up-> apgcatv
-usuario -up-> pesqv
-usuario -up-> cadcatv
-usuario -up-> apagarv
+  UC30 <.. UC31 : extend;
+  UC30 <.. UC32 : extend;
 
-usuario -up-> login
-usuario -left-> cadastro
-usuario -left-> logout
+  (Gerenciar comentários da categoria) as UC33
+	(Incluir comentários da categoria) as UC34
+	(Alterar comentários da categoria) as UC35
+	(Excluir comentários da categoria) as UC36
+	(Listar comentários da categoria) as UC37
 
+  UC33 <.. UC34 : extend;
+  UC33 <.. UC35 : extend;
+  UC33 <.. UC36 : extend;
+  UC33 <.. UC37 : extend;
 
-/' Include e Extend dos casos de uso do usuário '/
-apagarv .up.> verifprop : <<include>>
-apgcatv .up.> apagarv : <<include>>
-infdesc .down.> cadv : <<extend>>
+  USER -right-> UC24
+  USER -right-> UC30
+}
 
+package "Vídeos" {
+	(Gerenciar vídeos) as UC38
+	(Incluir vídeos) as UC39
+	(Alterar vídeos) as UC40
+	(Excluir vídeos) as UC41
+	(Listar vídeos) as UC42
+	(Buscar vídeos) as UC43
+  
+  UC38 <.. UC39 : extend;
+  UC38 <.. UC40 : extend;
+  UC38 <.. UC41 : extend;
+  UC38 <.. UC42 : extend;
+  UC38 <.. UC43 : extend;
 
-/' Associação dos casos de uso do administrador '/
-administrador -right-> modcatv
-administrador -left-> modcontv
-administrador -down-> apgvout
-administrador -down-> modtitdesc
+	(Compartilhar vídeo) as UC44
+  (Compartilhar Url do vídeo) as UC45
+	(Compartilhar vídeo no Whatsapp) as UC46
+
+  UC44 <.. UC45 : extend;
+  UC44 <.. UC46 : extend;
+
+	(Gerenciar comentários do vídeo) as UC47
+	(Incluir comentários do vídeo) as UC48
+	(Alterar comentários do vídeo) as UC49
+	(Excluir comentários do vídeo) as UC50
+	(Listar comentários do vídeo) as UC51
+
+  UC47 <.. UC48 : extend;
+  UC47 <.. UC49 : extend;
+  UC47 <.. UC50 : extend;
+  UC47 <.. UC51 : extend;
+
+  USER -right-> UC38
+  USER -right-> UC44
+
+  (Registrar alterações) as UC61
+
+  UC61 <.. UC40 : include;
+  UC61 <.. UC41 : include;
+
+}
+
+package "Youtube" {
+  (Buscar vídeos do Youtube) as UC52
+  (Selecionar vídeos) as UC53
+  (Visualizar metadados) as UC54
+  (Ordenar resultados) as UC55
+  (Importar vídeos) as UC56
+
+  UC52 <.. UC53 : extend;
+  UC52 <.. UC54 : extend;
+  UC52 <.. UC55 : extend;
+  UC52 <.. UC56 : extend;
+  UC56 <.. UC39 : include;
+
+  USER -right-> UC52
+}
+
+package "Administração" {
+	(Moderar vídeos) as UC57
+	(Moderar categorias) as UC58
+	(Moderar comentários) as UC59
+	(Notificar usuário) as UC60
+  (Registrar moderação) as UC62
+
+  UC58 ..> UC24 : include;
+  UC57 ..> UC38 : include;
+  UC59 ..> UC33 : include;
+  UC59 ..> UC47 : include;
+
+  ADMIN -left-> UC57
+  ADMIN -down-> UC58
+  ADMIN -down-> UC59
+  ADMIN -left-> UC60
+
+  UC61 <.. UC26 : include;
+  UC61 <.. UC27 : include;
+
+  UC62 <.. UC58 : include;
+  UC62 <.. UC59 : include;
+}
 
 @enduml
