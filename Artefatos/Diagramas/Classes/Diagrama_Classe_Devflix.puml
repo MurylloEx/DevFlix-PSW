@@ -10,6 +10,8 @@ class User {
     +registerUser() : void
     +createToken() : void
     +deleteToken() : void
+    +getUserId() : void
+    +createCommentary(commentaryText: string) : Commentary
 }
 
 class Admin {
@@ -25,6 +27,9 @@ class Category {
     -m_CategoryUrl : string
     -m_CategorySubtitle : string
     -m_CategoryColor : byte[3]
+    +m_CategoryComments : Commentary[]
+    +m_ExtraInfos : ExtraInfos[]
+    +m_CategoryAlterationHistory : AlterationHistory[]
     +setCategoryTitle() : void
     +getCategoryTitle() : string
     +setCategoryUrl() : void
@@ -36,31 +41,78 @@ class Category {
     +searchCategory() : Category[]
     +deleteCategory() : void
     +createCategory() : void
+    +shareCategory() : string
+    +filterCategory(): Category[]
+}
+
+class Commentary {
+    -m_CommentaryId : int
+    -m_Author : User
+    +m_CommentaryText : string
+    +getCommentaryId() : void
+    +getAuthor() : User
+}
+class ExtraInfos {
+    -m_ExtraInfosId : int
+    -m_Creator : User
+    +m_ExtraInfoCreatedAt : DateTime
+    +m_ExtraInfoEditedAt : DateTime
+    +m_ExtraInfoTitle: string;
+    +m_ExtraInfoBody: string;
 }
 
 class Video {
     -m_VideoId : int
-    -m_VideoUrl : string
     -m_VideoCategory : Category
     -m_VideoMetadata : Metadata
-    +deleteVideo() : void
+    +m_VideoComments : Commentary[]
+    +m_VideoExtraInfos : ExtraInfos[]
+    +m_VideoAlterationHistory : AlterationHistory[]
+    +deleteVideoFromCategory() : void
     +searchVideo() : Video[]
-    +createVideo() : void
-    +setMetadata() : void
+    +addVideoInCategory() : void
     +getMetadata() : Metadata
-    +getUserOwnerID() : int
+    +shareVideo() : string
+    +filterVideos() : Video[]
 }
+
 class Metadata{
     -m_MetadataID : int
+    -m_MetadataVideoLink : string
     -m_MetadataTitle : string
     -m_MetadataDescription : string
-    +setMetadataId(): void
+    -m_MetadataVideoYoutubeChannel : string
     +getMetadataId(): int
     +setMetadataTitle(): void
     +getMetadataTitle(): string
     +setMetadataDescription(): void
     +getMetadataDescription(): string
 }
+
+class AlterationHistory {
+    -m_Alterator: User
+    -m_LastAlteration: DateTime
+    -m_Alteration: string
+}
+
+class Channel {
+    -m_ChannelId : int
+    +m_Creator : User
+    -m_Private: bool
+    -m_Participants: User[]
+    +m_Contents: string[]
+    +getChannelId() : int
+    +setPrivacity() : void
+    +getPrivacity() : bool
+    +getParticipants() : User[]
+    +searchChannel() : Channel[]
+    +enterInChannel() : void 
+    +inviteLink() : string
+    +createAContent() : string
+
+}
+
+
 
 enum UserType {
     NORMAL_USER = 1
@@ -71,13 +123,26 @@ User "1"-up-"1" UserType
 User "1"--"0..*" Category
 User "1"--"0..*" Video
 User <|-- Admin
-Video "1"*--"1" Metadata : Possui
+
+Video "1"*-down-"1" Metadata : Possui
 Video "0..*"*--"1" Category : Associa
+
+Commentary "0..*"*-up-"1" Video : Possui
+ExtraInfos "0..*"*-up-"1" Video : Possui
+AlterationHistory "0..*"*-up-"1" Video : Possui
+Channel "0..*"*--"1" User : Possui/Participa
+
+Commentary "0..*"*--"1" Category : Possui
+ExtraInfos "0..*"*--"1" Category : Possui
+AlterationHistory "0..*"*--"1" Category : Possui
 
 note left of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
 note left of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
 
 note left of Video : {m_VideoUrl} URL de um vídeo do Youtube.
+note left of Video : {searchVideoOnYoutube() : VideoFromYouTube[]} retorna uma lista de videos do YouTube.
+note left of Channel : {searchChannel} e {enterInChannel} Somente estaráo disponíveis.
+note left of Channel : se o Channel não for privado ({getPrivacity()} retornar false).
 
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 
