@@ -1,0 +1,30 @@
+@startuml
+
+@startuml
+
+'title Pseudoestado de Estória
+
+state "Selecionando playlist" as selecionando
+state "Selecionando vídeo da playlist" as aumento
+state "Produto suspenso" as suspenso
+
+[*] --> selecionando
+
+selecionando --> aumento
+aumento --> produto
+
+state "Calculando novo valor do produto" as produto {
+    state "Selecionando produto" as selecao
+    state "Calculando valor" as calculo
+    state "Atualizando produto" as atualizando
+
+    [*] --> selecao
+    selecao --> calculo
+    calculo --> atualizando
+    suspenso --> [H]: "Continuar recálculo"
+}
+
+produto --> suspenso : "Suspender recalculo [se necessário]"
+
+produto --> [*]
+@enduml
