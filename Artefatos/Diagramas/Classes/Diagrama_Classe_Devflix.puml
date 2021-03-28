@@ -180,8 +180,8 @@ CategoryCommentary "0..*"*--"1" Category : Possui
 CategoryExtraInfos "0..*"*--"1" User : Cria
 CategoryExtraInfos "0..*"*--"1" Category : Possui
 
-CategoryAlterationHistory "0..*"*--"1" Category : Possui
 CategoryAlterationHistory "0..*"*--"1" User : Cria
+CategoryAlterationHistory "0..*"*--"1" Category : Possui
 
 
 note bottom of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
