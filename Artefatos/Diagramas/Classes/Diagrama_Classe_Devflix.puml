@@ -28,8 +28,8 @@ class Category {
     -m_CategorySubtitle : string
     -m_CategoryColor : byte[3]
     +m_CategoryComments : CategoryCommentary[]
-    +m_ExtraInfos : ExtraInfos[]
-    +m_CategoryAlterationHistory : AlterationHistory[]
+    +m_CategoryExtraInfos : CategoryExtraInfos[]
+    +m_CategoryAlterationsHistory : AlterationHistory[]
     +setCategoryTitle() : void
     +getCategoryTitle() : string
     +setCategoryUrl() : void
@@ -47,27 +47,35 @@ class Category {
 
 class Commentary {
     -m_CommentaryId : int
-    -m_Author : User
+    +m_Author : User
     +m_CommentaryText : string
     +getCommentaryId() : void
-    +getAuthor() : User
 }
 
 class VideoCommentary {
-   -m_VideoId : int
+   +m_VideoId : int
 }
 
 class CategoryCommentary {
-    -m_CategoryId : int
+    +m_CategoryId : int
 }
 
 class ExtraInfos {
     -m_ExtraInfosId : int
-    -m_Creator : User
+    +m_Creator : User
     +m_ExtraInfoCreatedAt : DateTime
     +m_ExtraInfoEditedAt : DateTime
     +m_ExtraInfoTitle: string;
     +m_ExtraInfoBody: string;
+    +getExtraInfosId() : int
+}
+
+class VideoExtraInfos {
+   +m_VideoId : int
+}
+
+class CategoryExtraInfos {
+    +m_CategoryId : int
 }
 
 class Video {
@@ -75,8 +83,8 @@ class Video {
     -m_VideoCategory : Category
     -m_VideoMetadata : Metadata
     +m_VideoComments : VideoCommentary[]
-    +m_VideoExtraInfos : ExtraInfos[]
-    +m_VideoAlterationHistory : AlterationHistory[]
+    +m_VideoExtraInfos : VideoExtraInfos[]
+    +m_VideoAlterationsHistory : VideoAlterationHistory[]
     +deleteVideoFromCategory() : void
     +searchVideo() : Video[]
     +addVideoInCategory() : void
@@ -99,9 +107,18 @@ class Metadata{
 }
 
 class AlterationHistory {
-    -m_Alterator: User
-    -m_LastAlteration: DateTime
-    -m_Alteration: string
+    -m_AlterationId : int
+    +m_Alterator: User
+    +m_LastAlteration: DateTime
+    +m_Alteration: string
+    +getAlterationId() : int
+}
+
+class VideoAlterationHistory {
+    +m_VideoId : int
+}
+class CategoryAlterationHistory {
+    +m_CategoryId : int
 }
 
 class Channel {
@@ -125,35 +142,51 @@ enum UserType {
     ADMIN_USER = 2
 }
 
-User "1"-up-"1" UserType
-User "1"--"0..*" Category
-User "1"--"0..*" Video
-User --|> Admin
-VideoCommentary "0..*"*--"1" User : Possui
-CategoryCommentary "0..*"*--"1" User : Possui
 
-VideoCommentary -up-|> Commentary
-CategoryCommentary -up-|> Commentary
+User <|-- Admin
+
+VideoAlterationHistory --|> AlterationHistory
+CategoryAlterationHistory --|> AlterationHistory
+
+VideoCommentary --|> Commentary
+CategoryCommentary --|> Commentary
+
+VideoExtraInfos --|> ExtraInfos
+CategoryExtraInfos --|> ExtraInfos
+
+User "1"-up-"1" UserType
 
 Video "1"*-down-"1" Metadata : Possui
 Video "0..*" o-- "1" Category : Associa
+Video "0..*"*--"1" User : Adiciona 
 
-VideoCommentary "0..*"*-up-"1" Video : Possui
-ExtraInfos "0..*"*-up-"1" Video : Possui
-AlterationHistory "0..*"*-up-"1" Video : Possui
 Channel "0..*"*--"1" User : Possui/Participa
 
-CategoryCommentary "0..*"*--"1" Category : Possui
-ExtraInfos "0..*"*--"1" Category : Possui
-AlterationHistory "0..*"*--"1" Category : Possui
+Category "0..*"*--"1" User : Cria
 
+VideoCommentary "0..*"*--"1" User : Cria
+VideoCommentary "0..*"*-up-"1" Video : Possui
+
+VideoExtraInfos "0..*"*--"1" User : Cria
+VideoExtraInfos "0..*"*-up-"1" Video : Possui
+
+VideoAlterationHistory "0..*"*--"1" User : Cria
+VideoAlterationHistory "0..*"*-up-"1" Video : Possui
+
+
+CategoryCommentary "0..*"*--"1" User : Cria
+CategoryCommentary "0..*"*--"1" Category : Possui
+
+CategoryExtraInfos "0..*"*--"1" User : Cria
+CategoryExtraInfos "0..*"*--"1" Category : Possui
+
+CategoryAlterationHistory "0..*"*--"1" Category : Possui
+CategoryAlterationHistory "0..*"*--"1" User : Cria
 
 
 note bottom of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
 note bottom of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
-
 note left of Channel : {searchChannel() : Channel[]} e {enterInAChannel() : void} Somente estaráo disponíveis se o Channel não for privado ({getPrivacity() : bool} retornar false).
-
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 
 @endtuml
