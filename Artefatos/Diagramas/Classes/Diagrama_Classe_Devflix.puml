@@ -1,4 +1,4 @@
-@startuml
+@startuml ClassDiagram
 
 left to right direction
 
@@ -27,9 +27,9 @@ class Category {
     -m_CategoryUrl : string
     -m_CategorySubtitle : string
     -m_CategoryColor : byte[3]
-    +m_CategoryComments : Commentary[]
-    +m_ExtraInfos : ExtraInfos[]
-    +m_CategoryAlterationHistory : AlterationHistory[]
+    +m_CategoryComments : CategoryCommentary[]
+    +m_CategoryExtraInfos : CategoryExtraInfos[]
+    +m_CategoryAlterationsHistory : AlterationHistory[]
     +setCategoryTitle() : void
     +getCategoryTitle() : string
     +setCategoryUrl() : void
@@ -47,27 +47,44 @@ class Category {
 
 class Commentary {
     -m_CommentaryId : int
-    -m_Author : User
+    +m_Author : User
     +m_CommentaryText : string
     +getCommentaryId() : void
-    +getAuthor() : User
 }
+
+class VideoCommentary {
+   +m_VideoId : int
+}
+
+class CategoryCommentary {
+    +m_CategoryId : int
+}
+
 class ExtraInfos {
     -m_ExtraInfosId : int
-    -m_Creator : User
+    +m_Creator : User
     +m_ExtraInfoCreatedAt : DateTime
     +m_ExtraInfoEditedAt : DateTime
     +m_ExtraInfoTitle: string;
     +m_ExtraInfoBody: string;
+    +getExtraInfosId() : int
+}
+
+class VideoExtraInfos {
+   +m_VideoId : int
+}
+
+class CategoryExtraInfos {
+    +m_CategoryId : int
 }
 
 class Video {
     -m_VideoId : int
     -m_VideoCategory : Category
     -m_VideoMetadata : Metadata
-    +m_VideoComments : Commentary[]
-    +m_VideoExtraInfos : ExtraInfos[]
-    +m_VideoAlterationHistory : AlterationHistory[]
+    +m_VideoComments : VideoCommentary[]
+    +m_VideoExtraInfos : VideoExtraInfos[]
+    +m_VideoAlterationsHistory : VideoAlterationHistory[]
     +deleteVideoFromCategory() : void
     +searchVideo() : Video[]
     +addVideoInCategory() : void
@@ -90,9 +107,19 @@ class Metadata{
 }
 
 class AlterationHistory {
-    -m_Alterator: User
-    -m_LastAlteration: DateTime
-    -m_Alteration: string
+    -m_AlterationId : int
+    +m_Alterator: User
+    +m_LastAlteration: DateTime
+    +m_Alteration: string
+    +getAlterationId() : int
+}
+
+class VideoAlterationHistory {
+    +m_VideoId : int
+}
+
+class CategoryAlterationHistory {
+    +m_CategoryId : int
 }
 
 class Channel {
@@ -106,44 +133,58 @@ class Channel {
     +getPrivacity() : bool
     +getParticipants() : User[]
     +searchChannel() : Channel[]
-    +enterInChannel() : void 
+    +enterInAChannel() : void 
     +inviteLink() : string
     +createAContent() : string
-
 }
-
-
 
 enum UserType {
     NORMAL_USER = 1
     ADMIN_USER = 2
 }
 
-User "1"-up-"1" UserType
-User "1"--"0..*" Category
-User "1"--"0..*" Video
 User <|-- Admin
 
-Video "1"*-down-"1" Metadata : Possui
-Video "0..*"*--"1" Category : Associa
+VideoAlterationHistory --|> AlterationHistory
+CategoryAlterationHistory --|> AlterationHistory
 
-Commentary "0..*"*-up-"1" Video : Possui
-ExtraInfos "0..*"*-up-"1" Video : Possui
-AlterationHistory "0..*"*-up-"1" Video : Possui
+VideoCommentary --|> Commentary
+CategoryCommentary --|> Commentary
+
+VideoExtraInfos --|> ExtraInfos
+CategoryExtraInfos --|> ExtraInfos
+
+User "1"-up-"1" UserType
+
+Video "1"*-down-"1" Metadata : Possui
+Video "0..*" o-- "1" Category : Associa
+Video "0..*"*--"1" User : Adiciona 
+
 Channel "0..*"*--"1" User : Possui/Participa
 
-Commentary "0..*"*--"1" Category : Possui
-ExtraInfos "0..*"*--"1" Category : Possui
-AlterationHistory "0..*"*--"1" Category : Possui
+Category "0..*"*--"1" User : Cria
 
-note left of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
-note left of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
+VideoCommentary "0..*"*--"1" User : Cria
+VideoCommentary "0..*"*-up-"1" Video : Possui
 
-note left of Video : {m_VideoUrl} URL de um vídeo do Youtube.
-note left of Video : {searchVideoOnYoutube() : VideoFromYouTube[]} retorna uma lista de videos do YouTube.
-note left of Channel : {searchChannel} e {enterInChannel} Somente estaráo disponíveis.
-note left of Channel : se o Channel não for privado ({getPrivacity()} retornar false).
+VideoExtraInfos "0..*"*--"1" User : Cria
+VideoExtraInfos "0..*"*-up-"1" Video : Possui
 
+VideoAlterationHistory "0..*"*--"1" User : Cria
+VideoAlterationHistory "0..*"*-up-"1" Video : Possui
+
+CategoryCommentary "0..*"*--"1" User : Cria
+CategoryCommentary "0..*"*--"1" Category : Possui
+
+CategoryExtraInfos "0..*"*--"1" User : Cria
+CategoryExtraInfos "0..*"*--"1" Category : Possui
+
+CategoryAlterationHistory "0..*"*--"1" User : Cria
+CategoryAlterationHistory "0..*"*--"1" Category : Possui
+
+note bottom of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
+note bottom of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
+note left of Channel : {searchChannel() : Channel[]} e {enterInAChannel() : void} Somente estaráo disponíveis se o Channel não for privado ({getPrivacity() : bool} retornar false).
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 
 @enduml

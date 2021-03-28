@@ -7,28 +7,44 @@ object User {
     m_UserType = 1
 }
 
+object Channel {
+    m_ChannelId = 4
+    m_ChannelCreator = User {m_UserId = 2}
+    m_ChannelPrivate = false
+    m_ChannelParticipants = User [m_UserId]
+    m_ChannelContents = ["ciencia", "educativo"]
+}
+
 object Category {
     m_CategoryID = 3
     m_CategoryTitle = "Ciência"
     m_CategoryUrl = "http://devflix.com.br/ciencia"
     m_CategorySubtitle = "Vídeos de ciencia"
     m_CategoryColor = [0xfc, 0xd9, 0x15]
+    m_CategoryComments = Commentary {m_CommentaryId : int, m_Author : User, m_CommentaryText : string, getCommentaryId() : void}
+    m_CategoryExtraInfos = ExtraInfos {m_ExtraInfosId : int ,m_Creator : User ,m_ExtraInfoCreatedAt : DateTime ,m_ExtraInfoEditedAt : DateTime ... }
+    m_CategoryAlternationsHistory = AlterationHistory {m_AlterationId : int, m_Alterator: User, m_LastAlteration: DateTime, m_Alteration: string, ... }
 }
 
 object Video {
     m_VideoId = 1
-    m_VideoUrl = "https://youtu.be/ZYz0O8gFbyQ"
     m_VideoCategory = Category {m_CategoryID = 3, m_CategoryTitle = Ciência, ... m_CategoryColor = [0xfc,0xd9,0x15]}
     m_VideoMetadata = Metadata {m_MetadataID = 5, ... m_MetadataDescription = Vídeo da ...}
+    m_VideoComments = ["Bem explicatibo", "Muito bom" ...]
+    m_VideoExtraInfos = ExtraInfos {m_ExtraInfosId : int ,m_Creator : User ,m_ExtraInfoCreatedAt : DateTime ,m_ExtraInfoEditedAt : DateTime ... }
+    m_VideoAlternationsHistory = AlterationHistory {m_AlterationId : int, m_Alterator: User, m_LastAlteration: DateTime, m_Alteration: string, ... }
 }
 
 object Metadata {
     m_MetadataID = 5
+    m_MetadataVideoLink = "https://youtu.be/ZYz0O8gFbyQ"
     m_MetadataTitle = "O que é Ciência?"
     m_MetadataDescription = "Video da disciplina de Fundamentos Teóricos, Metodológicos e Prática Escolar em Ciências I."
+    m_MetadataVideoToutubeChannel = "Uab Pedagogia UFJF"
 }
 
-User -- Category
+User -- Channel
+Channel -- Category
 Category -right- Video
 Video -- Metadata
 
