@@ -1,4 +1,4 @@
-@startuml
+@startuml ClassDiagram
 
 left to right direction
 
@@ -27,7 +27,7 @@ class Category {
     -m_CategoryUrl : string
     -m_CategorySubtitle : string
     -m_CategoryColor : byte[3]
-    +m_CategoryComments : Commentary[]
+    +m_CategoryComments : CategoryCommentary[]
     +m_ExtraInfos : ExtraInfos[]
     +m_CategoryAlterationHistory : AlterationHistory[]
     +setCategoryTitle() : void
@@ -52,6 +52,15 @@ class Commentary {
     +getCommentaryId() : void
     +getAuthor() : User
 }
+
+class VideoCommentary {
+   -m_VideoId : int
+}
+
+class CategoryCommentary {
+    -m_CategoryId : int
+}
+
 class ExtraInfos {
     -m_ExtraInfosId : int
     -m_Creator : User
@@ -65,7 +74,7 @@ class Video {
     -m_VideoId : int
     -m_VideoCategory : Category
     -m_VideoMetadata : Metadata
-    +m_VideoComments : Commentary[]
+    +m_VideoComments : VideoCommentary[]
     +m_VideoExtraInfos : ExtraInfos[]
     +m_VideoAlterationHistory : AlterationHistory[]
     +deleteVideoFromCategory() : void
@@ -106,13 +115,10 @@ class Channel {
     +getPrivacity() : bool
     +getParticipants() : User[]
     +searchChannel() : Channel[]
-    +enterInChannel() : void 
+    +enterInAChannel() : void 
     +inviteLink() : string
     +createAContent() : string
-
 }
-
-
 
 enum UserType {
     NORMAL_USER = 1
@@ -122,27 +128,31 @@ enum UserType {
 User "1"-up-"1" UserType
 User "1"--"0..*" Category
 User "1"--"0..*" Video
-User <|-- Admin
+User --|> Admin
+VideoCommentary "0..*"*--"1" User : Possui
+CategoryCommentary "0..*"*--"1" User : Possui
+
+VideoCommentary -up-|> Commentary
+CategoryCommentary -up-|> Commentary
 
 Video "1"*-down-"1" Metadata : Possui
-Video "0..*"*--"1" Category : Associa
+Video "0..*" o-- "1" Category : Associa
 
-Commentary "0..*"*-up-"1" Video : Possui
+VideoCommentary "0..*"*-up-"1" Video : Possui
 ExtraInfos "0..*"*-up-"1" Video : Possui
 AlterationHistory "0..*"*-up-"1" Video : Possui
 Channel "0..*"*--"1" User : Possui/Participa
 
-Commentary "0..*"*--"1" Category : Possui
+CategoryCommentary "0..*"*--"1" Category : Possui
 ExtraInfos "0..*"*--"1" Category : Possui
 AlterationHistory "0..*"*--"1" Category : Possui
 
-note left of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
-note left of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
 
-note left of Video : {m_VideoUrl} URL de um vídeo do Youtube.
-note left of Video : {searchVideoOnYoutube() : VideoFromYouTube[]} retorna uma lista de videos do YouTube.
-note left of Channel : {searchChannel} e {enterInChannel} Somente estaráo disponíveis.
-note left of Channel : se o Channel não for privado ({getPrivacity()} retornar false).
+
+note bottom of User : {createToken()} Cria um token de acesso, equivalente a fazer login.
+note bottom of User : {deleteToken()} Equivalente a fazer logout. Responsável por expirar o token.
+
+note left of Channel : {searchChannel() : Channel[]} e {enterInAChannel() : void} Somente estaráo disponíveis se o Channel não for privado ({getPrivacity()} retornar false).
 
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 
