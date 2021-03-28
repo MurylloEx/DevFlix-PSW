@@ -142,7 +142,6 @@ enum UserType {
     ADMIN_USER = 2
 }
 
-
 User <|-- Admin
 
 VideoAlterationHistory --|> AlterationHistory
