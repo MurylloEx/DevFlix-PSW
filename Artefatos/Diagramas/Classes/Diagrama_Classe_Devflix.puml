@@ -117,6 +117,7 @@ class AlterationHistory {
 class VideoAlterationHistory {
     +m_VideoId : int
 }
+
 class CategoryAlterationHistory {
     +m_CategoryId : int
 }
