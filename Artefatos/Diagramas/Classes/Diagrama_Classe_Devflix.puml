@@ -47,7 +47,7 @@ class Category {
 
 class Commentary {
     -m_CommentaryId : int
-    +m_Author : User
+    +m_AuthorName : string
     +m_CommentaryText : string
     +getCommentaryId() : void
 }
@@ -62,7 +62,7 @@ class CategoryCommentary {
 
 class ExtraInfos {
     -m_ExtraInfosId : int
-    +m_Creator : User
+    +m_CreatorName : string
     +m_ExtraInfoCreatedAt : DateTime
     +m_ExtraInfoEditedAt : DateTime
     +m_ExtraInfoTitle: string;
@@ -87,6 +87,7 @@ class Video {
     +m_VideoAlterationsHistory : VideoAlterationHistory[]
     +deleteVideoFromCategory() : void
     +searchVideo() : Video[]
+    +searchVideoOnCategory() : Video[]
     +addVideoInCategory() : void
     +getMetadata() : Metadata
     +shareVideo() : string
@@ -108,7 +109,7 @@ class Metadata{
 
 class AlterationHistory {
     -m_AlterationId : int
-    +m_Alterator: User
+    +m_AlteratorName: string
     +m_LastAlteration: DateTime
     +m_Alteration: string
     +getAlterationId() : int
