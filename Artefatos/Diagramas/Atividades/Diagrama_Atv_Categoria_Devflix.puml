@@ -1,7 +1,7 @@
-@startuml
+@startuml ActivityDiagramCategory
 
 partition "Diagrama de Categoria" {
-    partition "Modificar categoria" {
+    partition "Modificar Categoria" {
         (A)
         :Pesquisar categoria;
         :Localizar categoria;
@@ -17,8 +17,8 @@ partition "Diagrama de Categoria" {
         :Confirmar alterações;
         stop
     }
-    partition "Apagar categoria" {
-        (D)
+    partition "Apagar Categoria" {
+        (B)
         :Pesquisar categoria;
         :Localizar categoria;
         :Apagar vídeos da categoria;
@@ -26,7 +26,7 @@ partition "Diagrama de Categoria" {
         stop
     }
         partition "Cadastrar Categoria" {
-        (E)
+        (C)
         :Receber URL;
         :Receber título;
         :Receber subtítulo;

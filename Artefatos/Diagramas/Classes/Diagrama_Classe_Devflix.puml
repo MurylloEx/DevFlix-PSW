@@ -188,4 +188,4 @@ note bottom of User : {deleteToken()} Equivalente a fazer logout. Responsável p
 note left of Channel : {searchChannel() : Channel[]} e {enterInAChannel() : void} Somente estaráo disponíveis se o Channel não for privado ({getPrivacity() : bool} retornar false).
 note bottom of Metadata : São informações vindas diretamente do Youtube.
 
-@endtuml
+@enduml

@@ -1,8 +1,8 @@
-@startuml
+@startuml ActivityDiagramVideo
 
 partition "Diagrama de Vídeo" {
-    partition "Modificar vídeo" {
-        (B)
+    partition "Modificar Vídeo" {
+        (A)
         :Pesquisar vídeo;
         :Localizar vídeo;
         fork
@@ -16,16 +16,16 @@ partition "Diagrama de Vídeo" {
         end fork
         stop
     }
-    partition "Apagar vídeo" {
-        (C)
+    partition "Apagar Vídeo" {
+        (B)
         :Pesquisar vídeo;
         :Localizar vídeo;
         :Confirmar exclusão;
         stop
     }  
 
-    partition "Cadastrar vídeo" {
-        (E)
+    partition "Cadastrar Vídeo" {
+        (C)
         :Receber URL;
         :Receber título;
         :Receber descrição;
